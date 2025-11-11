@@ -1,6 +1,6 @@
 {
-  "id": "2736ecdc-0f5f-491e-9349-eeca32533e2e",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -62,8 +62,39 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "policies": {},
       "checkConstraints": {},
+      "policies": {},
+      "isRLSEnabled": false
+    },
+    "public.playing_with_neon": {
+      "name": "playing_with_neon",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {},
+      "policies": {},
       "isRLSEnabled": false
     }
   },
@@ -74,8 +105,11 @@
   "policies": {},
   "views": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
     "tables": {}
   }
 }

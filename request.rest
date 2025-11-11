@@ -1,3 +1,14 @@
-POST localhost:5000 HTTP/1.1
+POST http://localhost:5000/api/submit-form
+Content-Type: application/json
 
-content
+{
+    "fullName":"Afolabi Mubarak",
+    "email":"afolabimubarak18@gmail.com",
+    "institution":"UI",
+    "phone":"08012345678",
+    "course":"Computer Science",
+    "level":"100lv"
+}
+
+###
+GET http://localhost:5000/api/submissions
