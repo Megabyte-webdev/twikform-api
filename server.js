@@ -3,11 +3,18 @@ import dotenv from "dotenv";
 import submissionsRoutes from "./routes.js";
 import swaggerJsdoc from "swagger-jsdoc";
 import { swaggerOptions } from "./swagger.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: ["https://twikfoundation.org"], // adjust to your frontend
+    credentials: true,
+  })
+);
 // Use routes
 app.use("/api", submissionsRoutes);
 
