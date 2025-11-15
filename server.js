@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["https://twikfoundation.org", "https://twikfoundation.vercel.app"], // adjust to your frontend
+    origin: ["https://www.twikfoundation.org", "https://twikfoundation.org", "https://twikfoundation.vercel.app"], // adjust to your frontend
     credentials: true,
   })
 );
