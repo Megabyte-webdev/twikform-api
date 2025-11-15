@@ -1,6 +1,7 @@
 import express from "express";
 import { db } from "./db.js";
 import { submissions } from "./schema.js";
+import { eq } from "drizzle-orm";
 
 const router = express.Router();
 
@@ -21,6 +22,19 @@ router.post("/submit-form", async (req, res) => {
         error: `Missing: ${missingFields.join(", ")}`,
       });
 
+    const existing = await db
+      .select()
+      .from(submissions)
+      .where(eq(submissions.email, email))
+      .limit(1);
+
+    if (existing.length > 0) {
+      return res.status(409).json({
+        success: false,
+        error: "Email already exists.",
+      });
+    }
+
     const result = await db
       .insert(submissions)
       .values({ fullName, email, institution, phone, course, level })
@@ -28,23 +42,17 @@ router.post("/submit-form", async (req, res) => {
 
     res.status(201).json({ success: true, data: result[0] });
   } catch (err) {
-    if (err?.code === "23505") {
+    console.log(err);
+
+    // Drizzle-wrapped Postgres errors
+    if (err?.cause?.code === "23505") {
       return res.status(409).json({
         success: false,
         error: "Email already exists.",
-        detail: err.detail, // “Key (email)=(example@gmail.com) already exists.”
       });
     }
 
-    if (err?.code) {
-      return res.status(400).json({
-        success: false,
-        error: err.message,
-        detail: err.detail,
-        code: err.code,
-      });
-    }
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       error: "Server error",
     });
