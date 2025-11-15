@@ -28,7 +28,7 @@ router.post("/submit-form", async (req, res) => {
 
     res.status(201).json({ success: true, data: result[0] });
   } catch (err) {
-    if (err.code === "23505") {
+    if (err?.code === "23505") {
       return res.status(409).json({
         success: false,
         error: "Email already exists.",
@@ -36,7 +36,7 @@ router.post("/submit-form", async (req, res) => {
       });
     }
 
-    if (err.code) {
+    if (err?.code) {
       return res.status(400).json({
         success: false,
         error: err.message,
